@@ -4,8 +4,8 @@ FROM marcelmittelstaedt/airflow:latest
 # Set the working directory (optional but recommended for clarity)
 WORKDIR /home/airflow
 
-# Change permissions of the /home/airflow/airflow/python directory to 444 (read-write-only for everyone)
-# This is the Directory where the produced heatmap and kpi files will be saved
+# Change permissions of the /home/airflow/airflow/python directory to 666 (read-write-only for everyone)
+# This is the directory where the produced heatmap and kpi files will be saved
 RUN chmod 666 /home/airflow/airflow/python
 
 # Copy the required files into the specified directories
