@@ -140,7 +140,7 @@ def main():
 
 
 
-# CREATE KPI EXCEL OUT OF COMPUTED DATA FRAMES
+# CREATE KPI EXCEL FILE OUT OF COMPUTED DATA FRAMES
 
 def create_kpi_excel_file(pyspark_df_list):
     print("Creating Excel file ...")

@@ -42,7 +42,7 @@ def main():
     ).load(args.hdfs_source_dir + '/hubway_trips/' + args.year + '/' + args.month + '/hubway_' + args.year + '-' + args.month + '-' + args.day + '.csv')
 
     
-    # Make sure to have float valus (for distance calculation)
+    # Make sure to have float values (for distance calculation)
     df = df.withColumn("tripduration", col("tripduration").cast("int"))
     df = df.withColumn("start station latitude", col("start station latitude").cast("float"))
     df = df.withColumn("start station longitude", col("start station longitude").cast("float"))
@@ -56,7 +56,7 @@ def main():
 
     print("Loaded data into Pandas df.")
 
-    # Step 2: Check if the latitude and longitude columns exist
+    # Check if the latitude and longitude columns exist
     if 'start station latitude' in data.columns and 'start station longitude' in data.columns:
         # Extract the latitude and longitude into a list of tuples
         locations = data[['start station latitude', 'start station longitude']].dropna().values.tolist()
@@ -64,7 +64,7 @@ def main():
         print("CSV file must contain 'longitude' and 'latitude' columns.")
         exit()
 
-    # Step 3: Create a Folium map centered at the average location
+    # Create a Folium map centered at the average location
     # Calculate the mean latitude and longitude to center the map
     mean_lat = data['start station latitude'].mean()
     mean_lon = data['start station longitude'].mean()
@@ -82,7 +82,7 @@ def main():
 
     print("Added data to heatmap")
 
-    # Step 4: Add "start station id" as markers (ensure each location is added only once)
+    # Add "start station id" as markers (ensure each location is added only once)
     seen_locations = set()  # To track unique locations
 
     for index, row in data.iterrows():
@@ -99,7 +99,7 @@ def main():
             # Mark this location as seen
             seen_locations.add(location)
 
-    # Step 5: Save the map to an HTML file
+    # Save the map to an HTML file
     m.save('/home/airflow/airflow/python/heatmap.html')
 
     print("Heatmap with unique station IDs created successfully. Open 'heatmap.html' to view it.")

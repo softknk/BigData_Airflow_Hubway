@@ -26,39 +26,6 @@ args = {
 }
 
 
-#hiveSQL_create_hubway_trips_table = '''
-#CREATE EXTERNAL TABLE IF NOT EXISTS hubway_trips (
-#    tripduration INT,
-#    starttime TIMESTAMP,
-#    stoptime TIMESTAMP,
-#    `start station id` INT,
-#    `start station name` STRING,
-#    `start station latitude` DOUBLE,
-#    `start station longitude` DOUBLE,
-#    `end station id` INT,
-#    `end station name` STRING,
-#    `end station latitude` DOUBLE,
-#    `end station longitude` DOUBLE,
-#    bikeid INT,
-#    usertype STRING,
-#    `birth year` INT,
-#    gender INT
-#)
-#COMMENT 'Hubway Bike Trip Data' 
-#PARTITIONED BY (partition_year INT, partition_month INT) 
-#ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' -- Assuming CSV file
-#STORED AS TEXTFILE LOCATION '/user/hadoop/hubway/hubway_trips'
-#TBLPROPERTIES ('skip.header.line.count'='1');
-#'''
-#
-#hiveSQL_add_partition_hubway_trips = '''
-#ALTER TABLE hubway_trips ADD IF NOT EXISTS partition(partition_year={{ macros.ds_format(ds, "%Y-%m-%d", "%Y")}}, partition_month={{ macros.ds_format(ds, "%Y-%m-%d", "%m")}})
-#LOCATION '/user/hadoop/hubway/hubway_trips/{{ macros.ds_format(ds, "%Y-%m-%d", "%Y")}}/{{ macros.ds_format(ds, "%Y-%m-%d", "%m")}}/'; 
-#
-#LOAD DATA INPATH '/user/hadoop/hubway/hubway_trips/2024/11/hubway_2024-11-13.csv' INTO TABLE hubway_trips;
-#'''
-
-
 dag = DAG('Hubway', default_args=args, description='Hubway KPI',
           schedule_interval='56 18 * * *',
           start_date=datetime(2019, 10, 16), catchup=False, max_active_runs=1)
@@ -132,20 +99,6 @@ hdfs_put_hubway_data = HdfsPutFileOperator(
     hdfs_conn_id='hdfs',
     dag=dag,
 )
-
-#create_HiveTable_hubway_trips = HiveOperator(
-#    task_id='create_hubway_trips_table',
-#    hql=hiveSQL_create_hubway_trips_table,
-#    hive_cli_conn_id='beeline',
-#    dag=dag
-#)
-
-#addPartition_HiveTable_hubway_trips = HiveOperator(
-#    task_id='add_partition_hubway_trips_table',
-#    hql=hiveSQL_add_partition_hubway_trips,
-#    hive_cli_conn_id='beeline',
-#    dag=dag
-#)
 
 dummy_op = DummyOperator(
     task_id='dummy',
