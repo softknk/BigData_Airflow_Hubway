@@ -3,10 +3,7 @@
 """
 Title: Hubway DAG 
 Author: Daniel Kuenkel
-Description: 
-Just for educational purposes, not to be used in any productive mannor.
-Downloads IMDb data, puts them into HDFS and creates HiveTable.
-See Lecture Material: https://github.com/marcelmittelstaedt/BigData
+Description: Creating KPI and Heatmap from Kaggle Hubway dataset
 """
 
 from datetime import datetime
@@ -37,6 +34,7 @@ create_local_import_dir = CreateDirectoryOperator(
     dag=dag,
 )
 
+# Remove old csv folder
 clear_old_csv_folder = BashOperator(
     task_id='clear_old_csv',
     bash_command='rm -r -f /home/airflow/hubway/csv',

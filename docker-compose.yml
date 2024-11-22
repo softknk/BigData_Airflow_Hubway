@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Airflow service using the custom Dockerfile
+  airflow:
+    build:
+      context: .  # This assumes the Dockerfile is in the current directory
+    container_name: airflow
+    ports:
+      - "8080:8080"  # Expose Airflow UI on port 8080
+    networks:
+      - bigdatanet
+    depends_on:
+      - hadoop  # Ensure Airflow depends on the Hadoop service
+
+  # Hadoop service using the pulled Hadoop base image
+  hadoop:
+    image: marcelmittelstaedt/spark_base:latest
+    container_name: hadoop
+    ports:
+      - "8088:8088"  # YARN Resource Manager UI
+      - "9870:9870"  # Hadoop NameNode Web UI
+      - "9864:9864"  # Hadoop WebHDFS
+      - "10000:10000"  # Hadoop HiveServer2
+      - "8032:8032"  # YARN NodeManager (RPC)
+      - "8030:8030"  # YARN Resource Manager (RPC)
+      - "8031:8031"  # YARN Resource Manager Web UI
+      - "9000:9000"  # Hadoop HDFS (Namenode)
+      - "8888:8888"  # Hadoop Jupyter Notebook (if applicable)
+    networks:
+      - bigdatanet
+
+# Define custom network
+networks:
+  bigdatanet:
+    driver: bridge
