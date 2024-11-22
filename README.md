@@ -29,7 +29,7 @@ The `airflow` container is based on the `marcelmittelstaedt/airflow:latest` imag
 See the Airflow-Workflows on "xxx.xxx.xxx.xxx:8080" in your local web browser.
 
 ## Results
-The Excel KPI named `hubway_kpi_result.xlsx` contains different Sheets for the different KPI's. The following sheets are available:
+The Heatmap `heatmap.html` can be opened inside your local web browser. It show different start stations and common areas of high renting volume. What I found out during Exploration is, that Station with ID=67 is used very heavy. It is propably used to cross the river over the Harvard Bridge. Also it is near the MIT Campus, so students are frequent customers which can also be reasoned by the age share in the KPI. The Excel KPI named `hubway_kpi_result.xlsx` contains different Sheets for the different KPI's. The following sheets are available:
 
 
 - **Avg Trip Duration**: Average duration of trips.
