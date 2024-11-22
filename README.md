@@ -9,7 +9,7 @@ The `src` folder contains the three Python files used for the workflow. The `hub
 the `results` folder contains the two files (Excel KPI and heatmap.html) that were produced after successfully running the workflow with Airflow.
 
 ## Installation
-To build and run the two different docker containers called "airflow" and "hadoop" do:
+To build and run the two different docker containers called `airflow` and `hadoop` do:
 
 ```bash
   docker-compose up --build
@@ -24,7 +24,7 @@ To start the Hadoop services do the following:
   start-all.sh
 ```
 
-The "airflow" container is based on the "marcelmittelstaedt/airflow:latest" container and extends it by some custom libraries and tools that are used for the workflow.
+The `airflow` container is based on the `marcelmittelstaedt/airflow:latest` image and extends it by some custom libraries and tools that are used for the workflow.
 
 See the Airflow-Workflows on "xxx.xxx.xxx.xxx:8080" in your local web browser.
 
