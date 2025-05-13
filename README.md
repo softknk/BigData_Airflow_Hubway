@@ -1,6 +1,6 @@
-# Big Data: Hubway ETL-Workflow using Airflow
+# Big Data: Hubway ELT-Workflow using Airflow
 
-This is my final assignment for the Big Data course at DHBW Stuttgart where I created an ETL-Workflow with Airflow utilizing the open Hubway dataset from Kaggle (https://www.kaggle.com/datasets/acmeyer/hubway-data) to create an Excel KPI dashboard with PySpark as well as 
+This is my final assignment for the Big Data course at DHBW Stuttgart where I created an ELT-Workflow with Airflow utilizing the open Hubway dataset from Kaggle (https://www.kaggle.com/datasets/acmeyer/hubway-data) to create an Excel KPI dashboard with PySpark as well as 
 a heatmap illustrating dense regions/stations for Bluebike bike renting in Boston.
 
 ![Example Heatmap](results/heatmap_screenshot_example.png)
