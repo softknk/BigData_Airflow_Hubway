@@ -3,6 +3,8 @@
 This is my final assignment for the Big Data course at DHBW Stuttgart where I created an ETL-Workflow with Airflow utilizing the open Hubway dataset from Kaggle (https://www.kaggle.com/datasets/acmeyer/hubway-data) to create an Excel KPI dashboard with PySpark as well as 
 a heatmap illustrating dense regions/stations for Bluebike bike renting in Boston.
 
+![Example Heatmap](results/heatmap_screenshot_example.png)
+
 ## Project structure
 The `src` folder contains the three Python files used for the workflow. The `hubway.py` file defines the DAG. The `create_kpi_excel.py` contains the PySpark logic for extracting meaningful KPI data and creating the Excel file. The `create_loc_heatmap.py` is used to create a heatmap showing the most used start stations for renting a bike.
 
